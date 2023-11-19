@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsCloud, BsGear, BsHouseDoor, BsPerson, BsSearch } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 const NavigationContainer = {
@@ -22,11 +23,12 @@ const NavigationButton = {
 
 const BottomNavBar = () => {
     return (
-        <div style={NavigationContainer} >
-            <Link to="/home" style={{...NavigationButton}}>Home</Link>
-            <Link to="/search" style={{...NavigationButton}}>Search</Link>
-            <Link to="/account" style={{...NavigationButton}}>Account</Link>
-            <Link to="/setting" style={{...NavigationButton}}> Setting</Link>
+        <div style={NavigationContainer}>
+            <Link to="/" style={{ ...NavigationButton }}><BsHouseDoor /></Link>
+            <Link to="/search" style={{ ...NavigationButton }}><BsSearch /></Link>
+            <Link to="/saved-images" style={{ ...NavigationButton }}><BsCloud /></Link>
+            <Link to="/account" style={{ ...NavigationButton }}><BsPerson /></Link>
+            <Link to="/setting" style={{ ...NavigationButton }}><BsGear /></Link>
         </div>
     );
 };
