@@ -14,6 +14,7 @@ const Header = () => {
         fontSize: '1.5rem',
         fontWeight: 'bold',
         marginBottom: '0.5rem',
+        fontFamily: 'Helvetica, sans-serif',
     };
 
     return (

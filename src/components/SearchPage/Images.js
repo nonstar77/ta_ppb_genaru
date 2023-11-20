@@ -25,10 +25,16 @@ const Images = () => {
 
     return (
         <>
-            <h1 className="text-center mt-7 text-2xl">Results for {searchImage || '...'}</h1>
+            <h1 className="text-center mt-7 text-2xl">
+                {searchImage ? `Results for ${searchImage || 'cats'}` : "Searching..."}
+            </h1>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-6xl mx-auto px-4">
                 {isLoading ? (
-                    <Loader item={12} />
+                    <Loader item={10} />
+                ) : response.length === 0 ? (
+                    <p className="text-center">
+                        the image you're looking for isn't available.
+                    </p>
                 ) : (
                     response.map((data, key) => (
                         <ImageContainer key={key}>
@@ -40,7 +46,7 @@ const Images = () => {
                 )}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Images;

@@ -1,28 +1,29 @@
 // SavedImages.js
-import React, { useEffect, useState } from 'react';
-import Random from '../components/HomePage/Random';
+import React from 'react';
 
 const SavedImages = () => {
-const [savedImages, setSavedImages] = useState([]);
+// Get the saved images from local storage or an empty array
+const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
 
-useEffect(() => {
-    // Load saved images from local storage
-    const savedImagesData = localStorage.getItem('savedImages');
-    if (savedImagesData) {
-    setSavedImages(JSON.parse(savedImagesData));
-    }
-}, []);
-
+// SavedImages.js
 return (
     <div>
-    <h1 className="text-center mt-7 text-2xl">Saved Images</h1>
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {savedImages.map(savedImage => (
-        <Random url={savedImage.urls.thumb} key={savedImage.id} />
-        ))}
+    <h1>Saved Images</h1>
+    <div className="image-container">
+        {savedImages.map((savedImages, index) => {
+        console.log('savedImage:', savedImages); // Tambahkan ini
+        return (
+            <div key={index}>
+            {savedImages.urls && savedImages.urls.small && (
+                <img src={savedImages.urls.small} alt={savedImages.alt_description} />
+            )}
+            </div>
+        );
+        })}
     </div>
     </div>
 );
+
 };
 
 export default SavedImages;

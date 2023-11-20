@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Img = styled.img`
@@ -14,16 +14,12 @@ const Img = styled.img`
     }
 `;
 
-const Random = ({ data, url }) => {
-    const navigate = useNavigate();
-
-    const goToDetailPage = () => {
-        navigate(`/detail/${encodeURIComponent(url)}`);
-    };
-
+const Random = ({ url }) => {
     return (
         <div>
-            <Img src={url} alt="" onClick={goToDetailPage} />
+            <Link to={`/detail/${encodeURIComponent(url)}`}>
+                <Img src={url} alt="" />
+            </Link>
         </div>
     );
 };

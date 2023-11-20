@@ -1,8 +1,6 @@
-// Home.js
 import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from "styled-components";
 import Loader from "../components/HomePage/Loader";
 import Random from '../components/HomePage/Random';
@@ -24,60 +22,45 @@ const WrapperImages = styled.section`
     grid-auto-rows: 300px;
 `;
 
-const Home = () => {
-const [images, setImages] = useState([]);
+function Home() {
+    const [images, setImage] = useState([]);
 
-useEffect(() => {
-    fetchImages();
-}, []); // Run the effect only once on mount
+    useEffect(() => {
+        fetchImages();
+    }, []); // Run the effect only once on mount
 
-const fetchImages = (count = 12) => {
-    const apiRoot = "https://api.unsplash.com";
-    const accessKey = process.env.REACT_APP_ACCESS_KEY;
+    const fetchImages = (count = 12) => {
+        const apiRoot = "https://api.unsplash.com";
+        const accessKey = process.env.REACT_APP_ACCESS_KEY;
+    
+        axios
+            .get(`${apiRoot}/photos/random?client_id=${accessKey}&count=${count}`)
+            .then(res => {
+                setImage(prevImages => [...prevImages, ...res.data]);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
 
-    axios
-    .get(`${apiRoot}/photos/random?client_id=${accessKey}&count=${count}`)
-    .then(res => {
-        setImages(prevImages => [...prevImages, ...res.data]);
-    })
-    .catch(error => {
-        console.log(error);
-    });
-};
-
-const handleSaveImage = (image) => {
-    // Get the saved images from local storage or an empty array
-    const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-    // Check if the image is already saved
-    const isImageSaved = savedImages.some(savedImage => savedImage.id === image.id);
-    if (!isImageSaved) {
-    // Save the image to local storage
-    localStorage.setItem('savedImages', JSON.stringify([...savedImages, image]));
-    }
-};
-
-return (
-    <div>
-    <GlobalStyle />
-    <h1 className="text-center mt-7 text-2xl">Image from UnSplash API</h1>
-    <div className="text-center"><Link to="/saved-images">View Saved Images</Link></div>
-    <InfiniteScroll
-        dataLength={images.length}
-        next={fetchImages}
-        hasMore={true}
-        loader={<Loader />}
-    >
-        <WrapperImages>
-        {images.map(image => (
-            <div key={image.id}>
-            <Random url={image.urls.thumb} />
-            <button onClick={() => handleSaveImage(image)}>Save Image</button>
-            </div>
-        ))}
-        </WrapperImages>
-    </InfiniteScroll>
-    </div>
-);
-};
+    return (
+        <div>
+            <GlobalStyle />
+            <h1 className="text-center mt-7 text-2xl">Image from UnSplash API</h1>
+            <InfiniteScroll
+                dataLength={images.length}
+                next={fetchImages}
+                hasMore={true}
+                loader={<Loader/>}
+            >
+                <WrapperImages>
+                    {images.map(image => (
+                        <Random url={image.urls.thumb} key={image.id} />
+                    ))}
+                </WrapperImages>
+            </InfiniteScroll>
+        </div>
+    );
+}
 
 export default Home;
