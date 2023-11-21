@@ -24,12 +24,13 @@ const Detail = () => {
     useEffect(() => {
         const getImageDetails = async () => {
             const accessKey = process.env.REACT_APP_ACCESS_KEY;
-            
+    
             try {
                 const response = await axios.get(`https://api.unsplash.com/photos/${imageUrl}?client_id=${accessKey}`);
                 setImageDetails(response.data);
             } catch (error) {
                 console.error('Error fetching image details:', error);
+                console.log('Response:', error.response); // Log the response for more details
             }
         };
     
@@ -43,6 +44,9 @@ const Detail = () => {
     return (
         <DetailContainer>
             <DetailImg src={imageUrl} alt={imageDetails.alt_description} />
+            <div className='text-center'>
+                <p>no detail about this image</p>
+            </div>
         </DetailContainer>
     );
 };

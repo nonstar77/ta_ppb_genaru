@@ -27,7 +27,7 @@ function Home() {
 
     useEffect(() => {
         fetchImages();
-    }, []); // Run the effect only once on mount
+    }, []);
 
     const fetchImages = (count = 12) => {
         const apiRoot = "https://api.unsplash.com";
@@ -46,7 +46,7 @@ function Home() {
     return (
         <div>
             <GlobalStyle />
-            <h1 className="text-center mt-7 text-2xl">Image from UnSplash API</h1>
+            <h1 className="text-center mt-7 text-2xl">Image from Unsplash API</h1>
             <InfiniteScroll
                 dataLength={images.length}
                 next={fetchImages}
