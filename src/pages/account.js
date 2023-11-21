@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import image from './profileimage.png';
@@ -19,6 +18,8 @@ const Account = () => {
             </div>
             <p className="user-name">{userName}</p>
             <p className="nim">{nim}</p>
+            <p>S-1 Teknik Komputer</p>
+            <p>Universitas Diponegoro</p>
 
             <div className="social-icons">
                 <a href={instagramLink} target="_blank" rel="noopener noreferrer">
@@ -38,7 +39,7 @@ const Account = () => {
 const styles = `
     .profile-page {
         text-align: center;
-        padding: 20px;
+        padding: 10px;
         font-family: 'Poppins', sans-serif;
     }
 
@@ -49,6 +50,7 @@ const styles = `
     }
 
     .profile-picture {
+        padding-top: 30px;
         width: 250px;
         border-radius: 50%;
     }
@@ -62,10 +64,9 @@ const styles = `
 
     .nim {
         font-size: 1.5em;
-        margin-top: 10px;
         font-family: 'Poppins', sans-serif;
     }
-
+    
     .social-icons {
         margin-top: 20px;
         display: flex;
