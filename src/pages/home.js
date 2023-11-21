@@ -46,7 +46,7 @@ function Home() {
     return (
         <div>
             <GlobalStyle />
-            <h1 className="text-center mt-7 text-2xl">Image from Unsplash API</h1>
+            <h1 className="text-center mt-7 text-2xl">Image from Unplash API</h1>
             <InfiniteScroll
                 dataLength={images.length}
                 next={fetchImages}
@@ -55,7 +55,7 @@ function Home() {
             >
                 <WrapperImages>
                     {images.map(image => (
-                        <Random url={image.urls.thumb} key={image.id} />
+                        <Random key={image.id} id={image.id} url={image.urls.regular} />
                     ))}
                 </WrapperImages>
             </InfiniteScroll>

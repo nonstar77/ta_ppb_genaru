@@ -18,7 +18,7 @@ const Header = () => {
     };
 
     return (
-        <div className="header no-invert" style={headerStyle}>
+        <div className="header" style={headerStyle}>
             <div style={{ maxWidth: 'md', margin: 'auto', width: '100%' }}>
                 <h1 style={titleStyle}>Image Finder</h1>
             </div>

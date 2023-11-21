@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BsHouseDoor, BsInfoCircle, BsPerson, BsSearch } from 'react-icons/bs';
+import { BsHouseDoor, BsInfoCircle, BsListUl, BsPerson, BsSearch } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -14,6 +14,7 @@ const NavigationContainer = styled.div`
     width: 100%;
     height: 40px;
     margin-top: 10px;
+    z-index: 999;
 `;
 
 const NavigationButton = styled(Link)`
@@ -23,13 +24,14 @@ const NavigationButton = styled(Link)`
     color: ${(props) => (props.active ? '#555' : '#fff')};
     font-family: 'Poppins, sans-serif';
     transition: color 0.3s;
+    z-index: 999;
 
     &:hover {
-        color: #555; /* Warna abu-abu gelap saat di-hover */
+        color: #555;
     }
 
     &:active {
-        color: #555; /* Warna abu-abu gelap saat di-klik */
+        color: #555;
     }
 `;
 
@@ -51,14 +53,16 @@ const BottomNavBar = () => {
     return (
         <div>
             <ContentContainer>
-                {/* Your content goes here */}
             </ContentContainer>
             <NavigationContainer>
-                <NavigationButton to="/" active={activeLink === '/'} onClick={() => handleLinkClick('/')}>
-                    <BsHouseDoor size={iconSize} />
+                <NavigationButton to="/categories" active={activeLink === '/categories'} onClick={() => handleLinkClick('/categories')}>
+                    <BsListUl size={iconSize} />
                 </NavigationButton>
                 <NavigationButton to="/search" active={activeLink === '/search'} onClick={() => handleLinkClick('/search')}>
                     <BsSearch size={iconSize} />
+                </NavigationButton>
+                <NavigationButton to="/" active={activeLink === '/'} onClick={() => handleLinkClick('/')}>
+                    <BsHouseDoor size={iconSize} />
                 </NavigationButton>
                 <NavigationButton to="/account" active={activeLink === '/account'} onClick={() => handleLinkClick('/account')}>
                     <BsPerson size={iconSize} />

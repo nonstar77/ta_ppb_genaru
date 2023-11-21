@@ -1,52 +1,65 @@
+// DetailPage.js
+
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const DetailContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
 `;
 
 const DetailImg = styled.img`
-    max-width: 80%;
-    max-height: 80%;
-    object-fit: contain;
-    margin-bottom: 20px;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
 `;
 
 const Detail = () => {
-    const { imageUrl } = useParams();
-    const [imageDetails, setImageDetails] = useState({});
+    const { id } = useParams();
+    const [detailData, setDetailData] = useState(null);
 
     useEffect(() => {
-        const getImageDetails = async () => {
-            const accessKey = process.env.REACT_APP_ACCESS_KEY;
-    
+        const fetchData = async () => {
             try {
-                const response = await axios.get(`https://api.unsplash.com/photos/${imageUrl}?client_id=${accessKey}`);
-                setImageDetails(response.data);
+                if (!id) {
+                    console.error('Invalid URL: No "id" parameter found.');
+                    return;
+                }
+
+                const response = await axios.get(
+                    `https://api.unsplash.com/photos/${id}`,
+                    {
+                        params: {
+                            client_id: 'U2z6gxwaT0bJRUOYwt-NTz_EelpsVwzNWYsSGH8gnD4',
+                        },
+                    }
+                );
+
+                setDetailData(response.data);
             } catch (error) {
-                console.error('Error fetching image details:', error);
-                console.log('Response:', error.response); // Log the response for more details
+                console.error('Error fetching image details:', error.message);
             }
         };
-    
-        getImageDetails();
-    }, [imageUrl]);
-    
-    if (!imageDetails) {
-        return <div>Loading...</div>;
-    }
+
+        fetchData();
+    }, [id]);
 
     return (
         <DetailContainer>
-            <DetailImg src={imageUrl} alt={imageDetails.alt_description} />
-            <div className='text-center'>
-                <p>no detail about this image</p>
-            </div>
+            {detailData ? (
+                <>
+                    <DetailImg src={detailData.urls.regular} alt={detailData.alt_description || 'Image'} />
+                    <h2>{detailData.alt_description || 'Image Detail'}</h2>
+                    <p>{detailData.description || 'No description available.'}</p>
+                </>
+            ) : (
+                <p>Loading...</p>
+            )}
         </DetailContainer>
     );
 };

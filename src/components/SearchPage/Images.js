@@ -1,3 +1,4 @@
+// Images.js
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -13,9 +14,11 @@ const ImageContainer = styled.div`
         object-fit: cover;
         transition: transform 0.2s;
         cursor: pointer;
+        z-index: 1;
 
         &:hover {
             transform: scale(1.1);
+            z-index: 2;
         }
     }
 `;
@@ -33,11 +36,11 @@ const Images = () => {
     return (
         <div className="text-center">
             <h1 className="mt-7 text-2xl">
-                {searchImage ? `Results for ${searchImage || 'cats'}` : "Searching..."}
+                {searchImage ? `Results for ${searchImage}` : "Searching..."}
             </h1>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-6xl mx-auto px-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-6xl mx-auto px-4">
                 {isLoading ? (
-                    <Loader item={10} />
+                    <Loader item={12} />
                 ) : response.length === 0 ? (
                     <NoImages>
                         <p className="text-center">
@@ -47,13 +50,13 @@ const Images = () => {
                 ) : (
                     response.map((data, key) => (
                         <ImageContainer key={key}>
-                            <Link to={`/detail/${encodeURIComponent(data.urls.regular)}`}>
+                            <Link to={`/detail/${data.id}`}>
                                 <img src={data.urls.small} alt={data.alt_description} />
                             </Link>
                         </ImageContainer>
                     ))
                 )}
-                </div>
+            </div>
         </div>
     );
 };

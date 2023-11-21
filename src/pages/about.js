@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => {
     return (
-        <div className="about-container text-center my-10 mx-auto max-w-2xl" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+        <div className="text-center my-10 mx-auto max-w-2xl" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
             <h1 className="text-3xl font-bold mb-6">About</h1>
             <p className="mb-3">
                 Welcome to my image finder! I strive to provide a user-friendly and efficient platform for you to explore and discover a vast collection of high-quality images.

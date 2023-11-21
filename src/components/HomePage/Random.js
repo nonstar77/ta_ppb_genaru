@@ -14,10 +14,10 @@ const Img = styled.img`
     }
 `;
 
-const Random = ({ url }) => {
+const Random = ({ id, url }) => {
     return (
         <div>
-            <Link to={`/detail/${encodeURIComponent(url)}`}>
+            <Link to={`/detail/${id}`}>
                 <Img src={url} alt="" />
             </Link>
         </div>
