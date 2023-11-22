@@ -23,17 +23,20 @@ const NavigationButton = styled(Link)`
     cursor: pointer;
     color: ${(props) => (props.active ? '#555' : '#fff')};
     font-family: 'Poppins, sans-serif';
-    transition: color 0.3s;
+    transition: 0.3s;
     z-index: 999;
 
     &:hover {
         color: #555;
+        transform: scale(0.9);
     }
-
+    
     &:active {
         color: #555;
+        transform: scale(1.1);
+        transition: 0.3s;
     }
-`;
+    `;
 
 
 const ContentContainer = styled.div`

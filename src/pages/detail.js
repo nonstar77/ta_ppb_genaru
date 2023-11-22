@@ -1,5 +1,3 @@
-// DetailPage.js
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -17,6 +15,16 @@ const DetailImg = styled.img`
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 1rem;
+    transition: 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+`;
+
+const PageContainer = styled.div`
+    margin: 0 20px;
 `;
 
 const Detail = () => {
@@ -50,17 +58,19 @@ const Detail = () => {
     }, [id]);
 
     return (
-        <DetailContainer>
-            {detailData ? (
-                <>
-                    <DetailImg src={detailData.urls.regular} alt={detailData.alt_description || 'Image'} />
-                    <h2>{detailData.alt_description || 'Image Detail'}</h2>
-                    <p>{detailData.description || 'No description available.'}</p>
-                </>
-            ) : (
-                <p>Loading...</p>
-            )}
-        </DetailContainer>
+        <PageContainer>
+            <DetailContainer>
+                {detailData ? (
+                    <>
+                        <DetailImg src={detailData.urls.regular} alt={detailData.alt_description || 'Image'} />
+                        <h2>{detailData.alt_description || 'Image Detail'}</h2>
+                        <p>{detailData.description || 'No description available.'}</p>
+                    </>
+                ) : (
+                    <p>Loading...</p>
+                )}
+            </DetailContainer>
+        </PageContainer>
     );
 };
 

@@ -11,7 +11,7 @@ const SearchField = () => {
     }
 
     const handleButtonSearch = () => {
-        setCurrentPage(1); // Reset to first page when performing a new search
+        setCurrentPage(1);
         fetchData(`search/photos?page=1&query=${searchValue}&client_id=${process.env.REACT_APP_ACCESS_KEY}`)
         setSearchImage(searchValue);
     }

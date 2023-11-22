@@ -54,7 +54,7 @@ const styles = `
         width: 250px;
         border-radius: 50%;
     }
-
+    
     .user-name {
         font-weight: bold;
         font-size: 1.5em;
@@ -72,15 +72,18 @@ const styles = `
         display: flex;
         justify-content: center;
         align-items: center;
+        transition:0.3s;
     }
 
     .social-icons a {
         margin: 0 10px;
-        color: #000; /* Set your desired color */
+        color: #000;
     }
 
     .social-icons a:hover {
-        color: #007bff; /* Set your desired hover color */
+        color: #007bff;
+        transform: scale(1.05);
+        transition: 0.3s;
     }
 `;
 

@@ -6,11 +6,17 @@ const Img = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.2s;
+    transition: transform 0.3s;
     cursor: pointer;
-
+    border-radius: 8px;
+    
     &:hover {
-        transform: scale(1.2);
+        transform: scale(0.98);
+    }
+
+    &:active {
+        transform: scale(1.05);
+        transition: 0.3s;
     }
 `;
 

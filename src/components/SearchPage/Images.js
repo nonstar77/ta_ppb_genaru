@@ -1,4 +1,3 @@
-// Images.js
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -12,13 +11,17 @@ const ImageContainer = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.2s;
+        transition: transform 0.3s;
         cursor: pointer;
-        z-index: 1;
+        border-radius: 8px;
 
         &:hover {
-            transform: scale(1.1);
-            z-index: 2;
+            transform: scale(0.98);
+        }
+        
+        &:active {
+            transform: scale(1.05);
+            transition: 0.3s;
         }
     }
 `;
@@ -28,6 +31,7 @@ const NoImages = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
+    border-radius: 8px;
 `;
 
 const Images = () => {

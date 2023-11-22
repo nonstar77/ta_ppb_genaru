@@ -1,5 +1,24 @@
 import axios from 'axios';
 import { default as React, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledImage = styled.img`
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(0.98);
+    }
+
+    &:active {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+`;
 
 const Nature = () => {
     const [natureImages, setNatureImages] = useState([]);
@@ -15,14 +34,17 @@ const Nature = () => {
                 params: {
                     query: 'nature',
                     orientation: 'landscape',
-                    count: 9,
+                    count: 15,
                     client_id: 'U2z6gxwaT0bJRUOYwt-NTz_EelpsVwzNWYsSGH8gnD4',
                 },
                 }
             );
     
-            const newNatureImages = response.data.map((image) => image.urls.regular);
-            setNatureImages(newNatureImages);
+            const newNatureImages = response.data.map((image) => ({
+                id: image.id,
+                url: image.urls.regular,
+                }));
+                setNatureImages(newNatureImages);
             }
     
             setLoading(false);
@@ -48,14 +70,14 @@ const Nature = () => {
             <p>Loading...</p>
         ) : (
             <div className='grid grid-cols-3 gap-4 mt-4'>
-            {natureImages.map((imageUrl, index) => (
-                <img
-                key={index}
-                src={imageUrl}
-                alt={`Nature ${index + 1}`}
-                className='rounded-lg'
-                style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+            {natureImages.map((image, index) => (
+                <Link to={`/detail/${image.id}`} key={index}>
+                <StyledImage
+                    src={image.url}
+                    alt={`Nature ${index + 1}`}
+                    className='rounded-lg'
                 />
+                </Link>
             ))}
             </div>
         )}

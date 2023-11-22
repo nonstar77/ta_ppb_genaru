@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import BottomNavBar from './components/BottomNavBar';
 import Animal from './components/CategoriesPage/CategoryPage/animal';
+import Architecture from './components/CategoriesPage/CategoryPage/architecture';
 import City from './components/CategoriesPage/CategoryPage/city';
-import Film from './components/CategoriesPage/CategoryPage/film';
 import Food from './components/CategoriesPage/CategoryPage/food';
 import Nature from './components/CategoriesPage/CategoryPage/nature';
 import Space from './components/CategoriesPage/CategoryPage/space';
@@ -17,7 +17,6 @@ import Account from './pages/account';
 import Categories from './pages/categories';
 import Detail from './pages/detail';
 import Home from './pages/home';
-import SavedImage from './pages/savedimages';
 import Search from './pages/search';
 import SplashScreen from './pages/splashscreen';
 
@@ -42,14 +41,13 @@ function App() {
               <Route path="/Search" element={<Search />} />
               <Route path="/" element={<Home />} />
               <Route path="/Account" element={<Account />} />
-              <Route path="/SavedImages" element={<SavedImage />} />
               <Route path="/About" element={<About />} />
               <Route path="/detail/:id" element={<Detail />} />
               <Route path="/Categories" element={<Categories />} />
               <Route path="/Categories/Animal" element={<Animal />} />
               <Route path="/Categories/City" element={<City />} />
-              <Route path="/Categories/Film" element={<Film />} />
-              <Route path="/Categories/Food" element={<Food />} />
+              <Route path="/Categories/Architecture" element={<Architecture />} />
+              <Route path="/Categories/Food & Drink" element={<Food />} />
               <Route path="/Categories/Nature" element={<Nature />} />
               <Route path="/Categories/Space" element={<Space />} />
               <Route path="/Categories/Sports" element={<Sports />} />

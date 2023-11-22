@@ -1,5 +1,24 @@
 import axios from 'axios';
 import { default as React, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledImage = styled.img`
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(0.98);
+    }
+
+    &:active {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+`;
 
 const Space = () => {
     const [spaceImages, setSpaceImages] = useState([]);
@@ -15,14 +34,17 @@ const Space = () => {
                 params: {
                     query: 'space',
                     orientation: 'landscape',
-                    count: 9,
+                    count: 15,
                     client_id: 'U2z6gxwaT0bJRUOYwt-NTz_EelpsVwzNWYsSGH8gnD4',
                 },
                 }
             );
     
-            const newSpaceImages = response.data.map((image) => image.urls.regular);
-            setSpaceImages(newSpaceImages);
+            const newSpaceImages = response.data.map((image) => ({
+                id: image.id,
+                url: image.urls.regular,
+                }));
+                setSpaceImages(newSpaceImages);
             }
     
             setLoading(false);
@@ -51,14 +73,14 @@ const Space = () => {
             <p>Loading...</p>
         ) : (
             <div className='grid grid-cols-3 gap-4 mt-4'>
-            {spaceImages.map((imageUrl, index) => (
-                <img
-                key={index}
-                src={imageUrl}
-                alt={`Space ${index + 1}`}
-                className='rounded-lg'
-                style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+            {spaceImages.map((image, index) => (
+                <Link to={`/detail/${image.id}`} key={index}>
+                <StyledImage
+                    src={image.url}
+                    alt={`Space ${index + 1}`}
+                    className='rounded-lg'
                 />
+                </Link>
             ))}
             </div>
         )}

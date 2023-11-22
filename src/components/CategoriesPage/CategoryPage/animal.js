@@ -1,5 +1,25 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledImage = styled.img`
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(0.98);
+    }
+
+    &:active {
+        transform: scale(1.05);
+        transition: 0.3s;
+    }
+`;
+
 
 const Animal = () => {
 const [animalImages, setAnimalImages] = useState([]);
@@ -15,14 +35,17 @@ useEffect(() => {
             params: {
                 query: 'animal',
                 orientation: 'landscape',
-                count: 9,
+                count: 15,
                 client_id: 'U2z6gxwaT0bJRUOYwt-NTz_EelpsVwzNWYsSGH8gnD4',
             },
             }
         );
 
-        const newAnimalImages = response.data.map((image) => image.urls.regular);
-        setAnimalImages(newAnimalImages);
+        const newAnimalImages = response.data.map((image) => ({
+            id: image.id,
+            url: image.urls.regular,
+            }));
+            setAnimalImages(newAnimalImages);
         }
 
         setLoading(false);
@@ -51,14 +74,14 @@ return (
         <p>Loading...</p>
     ) : (
         <div className='grid grid-cols-3 gap-4 mt-4'>
-        {animalImages.map((imageUrl, index) => (
-            <img
-            key={index}
-            src={imageUrl}
-            alt={`Animal ${index + 1}`}
-            className='rounded-lg'
-            style={{ width: '100%', height: '400px', objectFit: 'cover' }}
+        {animalImages.map((image, index) => (
+            <Link to={`/detail/${image.id}`} key={index}>
+            <StyledImage
+                src={image.url}
+                alt={`Animal ${index + 1}`}
+                className='rounded-lg'
             />
+            </Link>
         ))}
         </div>
     )}

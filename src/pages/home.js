@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
+const PageContainer = styled.div`
+    margin: 0 20px;
+`;
+
 const WrapperImages = styled.section`
     max-width: 70rem;
     margin: 4rem auto;
@@ -44,7 +48,7 @@ function Home() {
     };
 
     return (
-        <div>
+        <PageContainer>
             <GlobalStyle />
             <h1 className="text-center mt-7 text-2xl">Image from Unplash API</h1>
             <InfiniteScroll
@@ -59,7 +63,7 @@ function Home() {
                     ))}
                 </WrapperImages>
             </InfiniteScroll>
-        </div>
+        </PageContainer>
     );
 }
 
