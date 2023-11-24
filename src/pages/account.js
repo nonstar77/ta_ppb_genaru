@@ -18,8 +18,8 @@ const Account = () => {
             </div>
             <p className="user-name">{userName}</p>
             <p className="nim">{nim}</p>
-            <p>S-1 Teknik Komputer</p>
-            <p>Universitas Diponegoro</p>
+            <p>S-1 Computer Engineering</p>
+            <p>Diponegoro University</p>
 
             <div className="social-icons">
                 <a href={instagramLink} target="_blank" rel="noopener noreferrer">
@@ -32,6 +32,8 @@ const Account = () => {
                     <FaGithub size={30} />
                 </a>
             </div>
+            
+            <p className='mt-4'>This app was created for my final assignment in mobile device programming class.</p>
         </div>
     );
 };

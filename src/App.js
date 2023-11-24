@@ -47,7 +47,7 @@ function App() {
               <Route path="/Categories/Animal" element={<Animal />} />
               <Route path="/Categories/City" element={<City />} />
               <Route path="/Categories/Architecture" element={<Architecture />} />
-              <Route path="/Categories/Food & Drink" element={<Food />} />
+              <Route path="/Categories/Food" element={<Food />} />
               <Route path="/Categories/Nature" element={<Nature />} />
               <Route path="/Categories/Space" element={<Space />} />
               <Route path="/Categories/Sports" element={<Sports />} />

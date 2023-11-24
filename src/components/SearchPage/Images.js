@@ -32,37 +32,44 @@ const NoImages = styled.div`
     align-items: center;
     height: 100%;
     border-radius: 8px;
+    margin-top: 10px;
+    
+    p {
+        text-align: center;
+    }
 `;
-
 const Images = () => {
     const { response, isLoading, searchImage } = useContext(ImageContext);
 
     return (
         <div className="text-center">
-            <h1 className="mt-7 text-2xl">
-                {searchImage ? `Results for ${searchImage}` : "Searching..."}
-            </h1>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-6xl mx-auto px-4">
-                {isLoading ? (
-                    <Loader item={12} />
-                ) : response.length === 0 ? (
-                    <NoImages>
-                        <p className="text-center">
-                            the image you're looking for isn't available.
-                        </p>
-                    </NoImages>
-                ) : (
-                    response.map((data, key) => (
-                        <ImageContainer key={key}>
-                            <Link to={`/detail/${data.id}`}>
-                                <img src={data.urls.small} alt={data.alt_description} />
-                            </Link>
-                        </ImageContainer>
-                    ))
-                )}
-            </div>
+            {isLoading ? (
+                <Loader key="loader" item={12} />
+            ) :
+            response.length === 0 ? (
+                <NoImages>
+                    <p>the image you're looking for isn't available.</p>
+                </NoImages>
+            ) :
+            (
+                <div>
+                    <h1 className="mt-7 text-2xl">
+                        {searchImage ? `Results for ${searchImage}` : "Searching..."}
+                    </h1>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 my-10 max-w-6xl mx-auto px-4">
+                        {response.map((data, key) => (
+                            <ImageContainer key={key}>
+                                <Link to={`/detail/${data.id}`}>
+                                    <img src={data.urls.small} alt={data.alt_description} />
+                                </Link>
+                            </ImageContainer>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
 export default Images;
+
